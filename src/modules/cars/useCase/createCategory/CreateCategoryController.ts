@@ -15,7 +15,7 @@ class CreateCategoryController {
       name,
       description,
     });
-    return response.status(301).send();
+    return response.status(201).send();
   }
 }
 
