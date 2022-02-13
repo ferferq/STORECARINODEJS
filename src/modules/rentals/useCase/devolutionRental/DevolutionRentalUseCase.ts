@@ -18,7 +18,7 @@ class DevolutionRentalUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute({ id, user_id }: IDevolutionRentalDTO): Promise<Rental> {
+  async execute({ id }: IDevolutionRentalDTO): Promise<Rental> {
     const rental = await this.rentalsRepository.findById(id);
     const minimumDaily = 1;
 
