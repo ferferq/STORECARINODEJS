@@ -7,8 +7,6 @@ class ListRentalsByUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;
 
-    console.log(user_id);
-
     const listRentalsByUserUseCase = container.resolve(
       ListRentalsByUserUseCase
     );
