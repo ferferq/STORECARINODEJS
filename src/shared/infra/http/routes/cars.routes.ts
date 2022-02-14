@@ -10,7 +10,7 @@ import uploadConfig from "../../../../config/upload";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { ensureIsAdmin } from "../middlewares/ensureIsAdmin";
 
-const uploadAvatar = multer(uploadConfig.upload("./tmp/avatar"));
+const uploadAvatar = multer(uploadConfig);
 
 const carsRoutes = Router();
 
