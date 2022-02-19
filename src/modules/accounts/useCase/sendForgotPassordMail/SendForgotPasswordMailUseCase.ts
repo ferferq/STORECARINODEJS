@@ -15,10 +15,10 @@ class SendForgotPasswordMailUseCase {
     private usersRepository: IUsersRepository,
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository,
-    @inject("DayjsDateProvider")
-    private dayjsDateProvider: IDateProvider,
-    @inject("EtherealMailProvider")
-    private etherealMailProvider: IMailProvider
+    @inject("DateProvider")
+    private dateProvider: IDateProvider,
+    @inject("MailProvider")
+    private mailProvider: IMailProvider
   ) {}
   async exec(email: string) {
     const user = await this.usersRepository.findByEmail(email);
@@ -38,7 +38,7 @@ class SendForgotPasswordMailUseCase {
 
     const token = uuidV4();
 
-    const expires_date = this.dayjsDateProvider.dateNowSomeHours(3);
+    const expires_date = this.dateProvider.dateNowSomeHours(3);
 
     await this.usersTokensRepository.create({
       refresh_token: token,
@@ -51,7 +51,7 @@ class SendForgotPasswordMailUseCase {
       link: `${process.env.FORGOT_MAIL_URL}${token}`,
     };
 
-    await this.etherealMailProvider.sendMail(
+    await this.mailProvider.sendMail(
       email,
       "Recuperação de senha",
       variables,

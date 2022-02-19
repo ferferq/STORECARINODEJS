@@ -16,8 +16,8 @@ class ResetPasswordUserUseCase {
   constructor(
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository,
-    @inject("DayjsDateProvider")
-    private dayjsDateProvider: IDateProvider,
+    @inject("DateProvider")
+    private dateProvider: IDateProvider,
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) {}
@@ -29,8 +29,8 @@ class ResetPasswordUserUseCase {
     if (!userToken) {
       throw new AppError("Token is invalid");
     }
-    const dateNow = this.dayjsDateProvider.dateNow();
-    const tokenIsExpired = this.dayjsDateProvider.compareIfBefore(
+    const dateNow = this.dateProvider.dateNow();
+    const tokenIsExpired = this.dateProvider.compareIfBefore(
       userToken.expires_date,
       dateNow
     );

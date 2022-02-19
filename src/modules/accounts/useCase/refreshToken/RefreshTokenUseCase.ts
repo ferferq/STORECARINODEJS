@@ -21,8 +21,8 @@ class RefreshTokenUseCase {
   constructor(
     @inject("UsersTokensRepository")
     private usersTokensRepository: UsersTokensRepository,
-    @inject("DayjsDateProvider")
-    private dayjsDateProvider: IDateProvider
+    @inject("DateProvider")
+    private dateProvider: IDateProvider
   ) {}
   async execute(token: string): Promise<ITokenResponse> {
     const { sub, email } = verify(token, auth.secret_refresh_token) as IPayload;
@@ -44,7 +44,7 @@ class RefreshTokenUseCase {
       expiresIn: auth.expires_in_refresh_token,
     });
 
-    const expires_date = this.dayjsDateProvider.dateNowSomeDays(
+    const expires_date = this.dateProvider.dateNowSomeDays(
       auth.expires_refresh_token_days
     );
 
