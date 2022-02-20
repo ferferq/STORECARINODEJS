@@ -17,7 +17,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: 16x
+          node-version: 16.x
           
       - name: Instalar dependencias
         run: yarn
@@ -32,5 +32,5 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
-          target: "test"
+          target: "~/app/STORECARINODEJS"
           
