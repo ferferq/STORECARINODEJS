@@ -5,3 +5,4 @@ dist
 coverage
 .vscode
 !tmp/.gitkeep
+ormconfig.json
