@@ -34,3 +34,16 @@ jobs:
           source: "., !node_modules"
           target: "~/app/STORECARINODEJS"
           
+      - name: update API
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SHH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/STORECARINODEJS
+            yarn
+            ./node_modules/.bin/typeorm migration:run
+            pm2 restart typescript_api
+          
