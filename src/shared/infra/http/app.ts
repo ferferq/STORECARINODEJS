@@ -7,6 +7,7 @@ import swaggerUi from "swagger-ui-express";
 
 import upload from "@config/upload";
 import { AppError } from "@shared/errors/AppError";
+import rateLimiter from "@shared/infra/http/middlewares/rateLimiter";
 
 import swaggerFile from "../../../swagger.json";
 import createConnection from "../typeorm";
@@ -15,9 +16,12 @@ import { router } from "./routes";
 import "@shared/container";
 
 createConnection();
+
 const app = express();
 
 app.use(express.json());
+
+app.use(rateLimiter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
